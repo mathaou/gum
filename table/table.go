@@ -16,13 +16,13 @@
 package table
 
 import (
-	"github.com/charmbracelet/bubbles/table"
 	tea "github.com/charmbracelet/bubbletea"
+	"github.com/charmbracelet/gum/mathaou"
 )
 
 type model struct {
-	table    table.Model
-	selected table.Row
+	table    mathaou.Model
+	selected mathaou.Row
 	quitting bool
 }
 
