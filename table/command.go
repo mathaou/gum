@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/alecthomas/kong"
-	"github.com/charmbracelet/bubbles/table"
+	//"github.com/charmbracelet/bubbles/table"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/mattn/go-runewidth"
 
@@ -33,20 +33,20 @@ func (o Options) Run() error {
 		}
 	}
 
-	var columns []table.Column
+	var columns []Column
 
 	for i, title := range o.Columns {
 		width := runewidth.StringWidth(title)
 		if len(o.Widths) > i {
 			width = o.Widths[i]
 		}
-		columns = append(columns, table.Column{
+		columns = append(columns, Column{
 			Title: title,
 			Width: width,
 		})
 	}
 
-	var rows []table.Row
+	var rows []Row
 
 	for _, line := range lines {
 		if line == "" {
@@ -59,20 +59,20 @@ func (o Options) Run() error {
 		rows = append(rows, row)
 	}
 
-	defaultStyles := table.DefaultStyles()
+	defaultStyles := DefaultStyles()
 
-	styles := table.Styles{
+	styles := Styles{
 		Cell:     defaultStyles.Cell.Inherit(o.CellStyle.ToLipgloss()),
 		Header:   defaultStyles.Header.Inherit(o.HeaderStyle.ToLipgloss()),
 		Selected: defaultStyles.Selected.Inherit(o.SelectedStyle.ToLipgloss()),
 	}
 
-	table := table.New(
-		table.WithColumns(columns),
-		table.WithFocused(true),
-		table.WithHeight(o.Height),
-		table.WithRows(rows),
-		table.WithStyles(styles),
+	table := New(
+		WithColumns(columns),
+		WithFocused(true),
+		WithHeight(o.Height),
+		WithRows(rows),
+		WithStyles(styles),
 	)
 
 	tm, err := tea.NewProgram(model{table: table}, tea.WithOutput(os.Stderr)).StartReturningModel()

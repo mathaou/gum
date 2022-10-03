@@ -16,13 +16,12 @@
 package table
 
 import (
-	"github.com/charmbracelet/bubbles/table"
 	tea "github.com/charmbracelet/bubbletea"
 )
 
 type model struct {
-	table    table.Model
-	selected table.Row
+	table    Model
+	selected Row
 	quitting bool
 }
 
