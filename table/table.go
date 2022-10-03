@@ -54,5 +54,8 @@ func (m model) View() string {
 	if m.quitting {
 		return ""
 	}
-	return m.table.View()
+
+	ret := m.table.View()
+
+	return ret
 }
